@@ -8,23 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: cirrusci/android-sdk:34
 
     steps:
     - name: Repoyu Klonla
       uses: actions/checkout@v4
 
-    - name: Java 17 Kur
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Gradle Wrapper Kur
+    - name: Gradle Wrapper Oluştur ve İzin Ver
       run: |
         gradle wrapper --gradle-version 8.6
+        chmod +x gradlew
 
     - name: APK Derle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
     - name: APK'yı Çıktı Olarak Yükle
       uses: actions/upload-artifact@v4
