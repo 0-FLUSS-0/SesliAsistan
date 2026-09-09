@@ -22,6 +22,10 @@ jobs:
     - name: Android SDK Kur
       uses: android-actions/setup-android@v3
 
+    - name: SDK Paketlerini ve Platform 34'ü Yükle
+      run: |
+        yes | sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
     - name: Gradle Wrapper Oluştur ve İzin Ver
       run: |
         gradle wrapper --gradle-version 8.6
